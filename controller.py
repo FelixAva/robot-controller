@@ -1,7 +1,7 @@
 import serial
 import time
 import threading as th
-from wlkata_UART import Wlkata_UART
+from wlkata_UART import Wlkata_UART, MS4220_UART
 from position import PositionManager
 
 def pick_a_b ():
@@ -34,6 +34,8 @@ def get_home():
 def setup_serial_connection(port_name):
     ser = serial.Serial(port_name, 115200, timeout=1)
     robot = Wlkata_UART()
+    conveyor = MS4220_UART()
+    conveyor.init(ser, -1)
     robot.init(ser, -1)
     return robot
 
